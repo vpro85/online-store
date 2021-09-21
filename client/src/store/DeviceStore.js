@@ -31,9 +31,8 @@ export default class DeviceStore {
             "updatedAt": "2021-09-20T17:11:47.100Z"
         }, {"id": 3, "name": "Haier", "createdAt": "2021-09-20T20:49:05.283Z", "updatedAt": "2021-09-20T20:49:05.283Z"}]
 
-        this._devices = {
-            "count": 2,
-            "rows": [{
+        this._devices =
+            [{
                 "id": 1,
                 "name": "Galaxy S21 5G 256 ГБ серый фантом",
                 "price": 73990,
@@ -54,7 +53,8 @@ export default class DeviceStore {
                 "typeId": 1,
                 "brandId": 3
             }]
-        }
+        this._selectedType = {}
+        this._selectedBrand = {}
         makeAutoObservable(this)
     }
 
@@ -70,6 +70,14 @@ export default class DeviceStore {
         this._devices = devices
     }
 
+    setSelectedType(type) {
+        this._selectedType = type
+    }
+
+    setSelectedBrand(brand) {
+        this._selectedBrand = brand
+    }
+
     get types() {
         return this._types
     }
@@ -82,4 +90,11 @@ export default class DeviceStore {
         return this._devices
     }
 
+    get selectedType() {
+        return this._selectedType
+    }
+
+    get selectedBrand() {
+        return this._selectedBrand
+    }
 }
