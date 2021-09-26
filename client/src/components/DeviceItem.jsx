@@ -14,7 +14,7 @@ const DeviceItem = ({device}) => {
                     <div>{device.name}</div>
                     <div className="d-flex align-items-center">
                         <div>{device.rating} </div>
-                        <img width={18} height={18} src={star}/>
+                        <img width={18} height={18} src={star} alt='star'/>
                     </div>
                 </div>
                 <div>{device.name}</div>

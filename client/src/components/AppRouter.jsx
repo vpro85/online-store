@@ -8,6 +8,7 @@ const AppRouter = () => {
     const {user} = useContext(Context)
 
     return (
+
         <Switch>
             {user.isAuth && authRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} component={Component} exact/>
