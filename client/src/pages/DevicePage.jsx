@@ -1,31 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import star from '../assets/big_star.png'
+import {useParams} from "react-router-dom/cjs/react-router-dom";
+import {fetchOneDevice} from "../components/http/deviceAPI";
 
 const DevicePage = () => {
-    const device = {
-        "id": 1,
-        "name": "Galaxy S21 5G 256 ГБ",
-        "price": 73990,
-        "rating": 0,
-        "img": "b1c8dc53-b3cd-4ddf-b478-479132b76060.jpg",
-        "createdAt": "2021-09-20T19:20:35.841Z",
-        "updatedAt": "2021-09-20T19:20:35.841Z",
-        "typeId": 2,
-        "brandId": 1
-    }
-    const description = [
-        {id: 1, title: 'Оперативная память', description: '5 ГБ'},
-        {id: 2, title: 'Камера', description: '12 Мп'},
-        {id: 3, title: 'Процессор', description: 'Exynos 2100'},
-        {id: 4, title: 'Кол-во ядер', description: ' 8'},
-        {id: 5, title: 'Аккумулятор', description: '4000 мАч'},
-    ]
+
+    const [device, setDevice] = useState({info: []})
+    const {id} = useParams()
+
+    useEffect(() => {
+        fetchOneDevice(id).then(data => setDevice(data))
+    }, [])
+
     return (
         <Container className="mt-3">
             <Row>
                 <Col md={4}>
-                    <Image width={300} height={300} src={'http://192.168.1.13:5000/' + device.img} alt={device.name}/>
+                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img} alt={device.name}/>
                 </Col>
                 <Col md={4}>
                     <Row className="d-flex flex-column align-items-center">
@@ -52,7 +44,7 @@ const DevicePage = () => {
             </Row>
             <Row className="d-flex flex-column mt-3">
                 <h1>Product specifications: </h1>
-                {description.map((info, index) =>
+                {device.info.map((info, index) =>
                     <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}>
                         {info.title}: {info.description}
                     </Row>
